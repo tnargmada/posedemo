@@ -21,7 +21,7 @@ const POSENET_CONFIG = {
   // these are all defaults
   'architecture': 'MobileNetV1',
   'outputStride': 16,
-  'inputResolution': 257,
+  // 'inputResolution': (setting this breaks posenet if it doesn't match the camera)
   'multiplier': 1.0,
   'quantBytes': 4,
 }
@@ -55,6 +55,8 @@ class PoseDetector {
       poseModel = poseDetection.SupportedModels.MoveNet
       config = MOVENET_CONFIG;
     }
+
+    console.log('here');
     
     // make the detector
     this.detector = await poseDetection.createDetector(model, config);
