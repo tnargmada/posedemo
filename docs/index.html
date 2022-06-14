@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/posedemo/assets/favicon.17e50649.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pose Detection</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script type="module" crossorigin src="/posedemo/assets/index.a1d4cc40.js"></script>
+    <link rel="stylesheet" href="/posedemo/assets/index.140bc536.css">
+  </head>
+  <body>
+    <div id="options">
+      <p id="start-info">Select a model and a demo (keypoints for model info, kaleidoscope for an interactive), then click start.</p>
+      <p id="keypoint-info" style="display: none;">Hover over a keypoint to see its name.</p>
+      <p id="kaleidoscope-info" style="display: none;">Hold up your hands to see a kaleidoscope.</p>
+      <p id="run-info" style="display: none;">Reload the page to change models or demos.</p>
+      <p>
+        Model:
+        <span><select id="model">
+          <option value="MoveNet">MoveNet</option>
+          <option value="PoseNet">PoseNet</option>
+          <option value="BlazePose">BlazePose</option>
+        </select></span>
+        Demo:
+        <span><select id="demo">
+          <option value="keypoints">Keypoints</option>
+          <option value="kaleidoscope">Kaleidoscope</option>
+        </select></span>
+        <span><button id="start">Start</button></span>
+      </p>
+    </div>
+    <video id="input-video" style="display: none;" autoplay></video>
+    
+  </body>
+</html>
