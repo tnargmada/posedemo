@@ -40,11 +40,15 @@ function drawPose(p) {
       let point = posePoints[i];
       if (point['score'] > CONFIDENCE_THRESHHOLDS[model]) {
         // circle
-        p.fill(255, 0, 0);
-        p.ellipse(point['x'], point['y'], 5, 5);
+        p.stroke(50, 100, 100);
+        p.fill(0, 100, 100);
+        p.ellipse(point['x'], point['y'], 10, 10);
         // label
-        p.fill(0, 255, 0);
-        p.text(point['name'], point['x'] + 10, point['y'] + 10);
+        let mouseDist = p.sqrt(p.pow(p.mouseX - point['x'], 2) + p.pow(p.mouseY - point['y'], 2));
+        if (mouseDist < 15) {
+          p.fill(50, 100, 100);
+          p.text(point['name'], point['x'] + 10, point['y'] + 10);
+        }
       }
     }
   }
@@ -101,6 +105,13 @@ document.getElementById('start').onclick = () => {
 
   // remove start button, lock dropdown
   document.getElementById('start').style = 'display: none;';
+  document.getElementById('start-info').style = 'display: none;';
+  document.getElementById('run-info').style = 'display: block;';
+  if (demo == 'keypoints') {
+    document.getElementById('keypoint-info').style = 'display: block;';
+  } else {
+    document.getElementById('kaleidoscope-info').style = 'display: block;';
+  }
   document.getElementById('model').setAttribute('disabled', 'disabled');
   document.getElementById('demo').setAttribute('disabled', 'disabled');
 };
@@ -160,6 +171,12 @@ const sketch = (p) => {
       let flip = 1;
       if (i % 2 != 0) flip = -1;
         
+      p.fill(92, 50 * saturate, 70);
+      p.ellipse(145 * p.pow(size, 1.3) * flip, 140 * p.pow(size, 1.3),
+                30 * flip * size, 50 * size);
+      p.fill(16, 86 * saturate, 98);
+      p.rect(100 * p.pow(size, 1.3) * flip, 70 * p.pow(size, 1.3),
+             20 * flip * size, 50 * size);
       p.fill(12, 62 * saturate, 90);
       p.ellipse(10 * p.pow(size, 1.4) * 1.5 * flip, 60 * p.pow(size, 1.4) * 1.5,
                 70 * p.pow(size, 1.4), 150 * p.pow(size, 1.4));
@@ -172,6 +189,9 @@ const sketch = (p) => {
       p.fill(91, 92 * saturate, 38);
       p.ellipse(90 * p.pow(size, 1.2) * flip, 100 * p.pow(size, 1.2) * 1.5,
                 50 * size, 50 * size);
+      p.fill(51, 73 * saturate, 96);
+      p.rect(120 * p.pow(size, 1) * flip, 60 * p.pow(size, 1),
+             30 * flip * size, 65 * size);
       
       p.pop();
     }
@@ -198,6 +218,9 @@ const sketch = (p) => {
       p.fill(60, 93 * saturate, 78);
       p.ellipse(5 * p.pow(size, 2) * 0.9 * flip, 130 * p.pow(size, 2) * 0.9,
                 90 * size, 55 * size);
+      p.fill(92, 50 * saturate, 70);
+      p.ellipse(5 * p.pow(size, 1.8) * 0.9 * flip, 120 * p.pow(size, 1.8) * 0.9,
+                30 * size, 30 * size);
       p.fill(16, 86, 98);
       p.ellipse(0, 0, 10 * size, 16 * size);
       p.stroke(7, 80 * saturate, 100);
